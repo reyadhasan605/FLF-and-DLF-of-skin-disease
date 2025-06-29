@@ -109,9 +109,8 @@ The project uses the following datasets:
 ### Data Splitting
 - **HAM10000**: 80% training, 20% testing, with training data augmented using GAN and ISIC Archive.
 - **ISIC 2018 Test Data**: HAM10000 used for training; ISIC 2018 test data for evaluation.
-- **PH2**: Augmented using GAN and methods from [Benyahia et al. (2022)](https://doi.org/10.1016/j.tice.2021.101701). Split into five folds:
+- **PH2**: Split into five folds:
   ```bash
-  python utils/augment_ph2.py --input_folder /path/to/input --output_folder /path/to/output --num_images 1000
   python utils/folding.py --root_dir /path/to/dataset --output_root /path/to/folds --num_folds 5 --seed 42
   ```
 - **ISIC 2019**: 90% training, 10% testing, with training data augmented using GAN and ISIC Archive.
@@ -186,7 +185,7 @@ Organize datasets as specified in [Datasets](#datasets). Augment data using GAN 
 
 
 ## Results
-To reproduce results, download datasets and checkpoints from [Google Drive](https://drive.google.com/drive/folders/1j9bsPmoJTaPMQytaKNG7_iF-eyLj3r3R?usp=sharing).
+To reproduce results, download datasets and checkpoints from [Google Drive_1](https://drive.google.com/drive/folders/1j9bsPmoJTaPMQytaKNG7_iF-eyLj3r3R?usp=sharing) and [Google Drive_2](https://drive.google.com/drive/folders/19g1y-yu9EestgWqoOzY6bG4jE_nM5ZBd?usp=sharing)
 
 ## Reproducibility
 For reproducible results:
