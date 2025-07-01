@@ -158,10 +158,14 @@ Combines predictions from individual models:
    - Ensure TensorFlow 2.11.1 compatibility with NVIDIA GPUs.
 
 ## Usage
+
+
 ### Preparing the Datasets
 Organize datasets as specified in [Datasets](#datasets). Augment data using GAN or ISIC Archive as needed.
+### Training Models :
 
-### Training Models
+#### Train HAM10000 and ISIC2019 dataset:
+
 1. **Decision-Level Fusion**:
    ```bash
    python main.py --mode train --fusion decision --decision_method majority --train_dir /path/to/train --test_dir /path/to/test --vit_checkpoint /path/to/vit_model.h5 --vgg_checkpoint /path/to/vgg_model.h5 --densenet_checkpoint /path/to/densenet_model.h5
@@ -173,7 +177,55 @@ Organize datasets as specified in [Datasets](#datasets). Augment data using GAN 
    ```
    Output: `fusion_checkpoint.hdf5`.
 
-### Evaluating Models
+#### Train ISIC2018 and PH2 dataset :
+
+Organize the dataset as specified in [Datasets](#datasets). Convert the data into numpy format using follwing script:
+
+
+
+
+
+1. **Feature-Level Fusion**:
+```
+   python main_npy.py \
+   --mode train \
+   --fusion feature \
+   --train_npy path/to/train_data.npy \
+   --train_npy_labels path/to/train_labels.npy \
+   --test_npy path/to/test_data.npy \
+   --test_npy_labels path/to/test_labels.npy \
+   --feature_checkpoint checkpoints/feature_model.h5 \
+   --image_size 224 \
+   --batch_size batch_size \
+   --epochs 150 \
+   --n_class number_of_class
+   ```
+2. **Decision-Level Fusion**:
+```
+   python main_npy.py \
+   --mode train \
+   --fusion decision \
+   --decision_method majority \
+   --train_npy path/to/train_data.npy \
+   --train_npy_labels path/to/train_labels.npy \
+   --test_npy path/to/test_data.npy \
+   --test_npy_labels path/to/test_labels.npy \
+   --vit_checkpoint checkpoints/vit_model.h5 \
+   --vgg_checkpoint checkpoints/vgg_model.h5 \
+   --densenet_checkpoint checkpoints/densenet_model.h5 \
+   --image_size 224 \
+   --batch_size batch_size \
+   --epochs 150 \
+   --n_class number_of_class
+
+   ```
+
+
+
+### Evaluating models:
+
+#### Evaluating HAM10000 and ISIC2019 dataset :
+
 1. **Decision-Level Fusion**:
    ```bash
    python main.py --mode test --fusion decision --decision_method majority --test_dir /path/to/test --vit_checkpoint /path/to/vit_model.h5 --vgg_checkpoint /path/to/vgg_model.h5 --densenet_checkpoint /path/to/densenet_model.h5
@@ -184,8 +236,49 @@ Organize datasets as specified in [Datasets](#datasets). Augment data using GAN 
    ```
 
 
+#### Evaluating ISIC2018 and PH2 dataset :
+
+Organize the dataset as specified in [Datasets](#datasets). Convert the data into numpy format using follwing script:
+
+1. **Feature-Level Fusion**:
+   ```
+   python main_npy.py \
+   --mode test \
+   --fusion feature \
+   --train_npy path/to/train_data.npy \
+   --train_npy_labels path/to/train_labels.npy \
+   --test_npy path/to/test_data.npy \
+   --test_npy_labels path/to/test_labels.npy \
+   --feature_checkpoint checkpoints/feature_model.h5 \
+   --image_size 224 \
+   --batch_size batch_size \
+   --epochs 150 \
+   --n_class number_of_class
+   ```
+2. **Decision-Level Fusion**:
+
+   ```
+      python main_npy.py \
+      --mode test \
+      --fusion decision \
+      --decision_method majority \
+      --train_npy path/to/train_data.npy \
+      --train_npy_labels path/to/train_labels.npy \
+      --test_npy path/to/test_data.npy \
+      --test_npy_labels path/to/test_labels.npy \
+      --vit_checkpoint checkpoints/vit_model.h5 \
+      --vgg_checkpoint checkpoints/vgg_model.h5 \
+      --densenet_checkpoint checkpoints/densenet_model.h5 \
+      --image_size 224 \
+      --batch_size batch_size \
+      --epochs 150 \
+      --n_class number_of_class
+
+      ```
+
+
 ## Results
-To reproduce results, download datasets and checkpoints from [Google Drive_1](https://drive.google.com/drive/folders/1j9bsPmoJTaPMQytaKNG7_iF-eyLj3r3R?usp=sharing) and [Google Drive_2](https://drive.google.com/drive/folders/19g1y-yu9EestgWqoOzY6bG4jE_nM5ZBd?usp=sharing)
+To reproduce results, download datasets and checkpoints from [Google Drive_1](https://drive.google.com/drive/folders/1j9bsPmoJTaPMQytaKNG7_iF-eyLj3r3R?usp=sharing), [Google Drive_2](https://drive.google.com/drive/folders/19g1y-yu9EestgWqoOzY6bG4jE_nM5ZBd?usp=sharing), and [Google Drive_3](https://drive.google.com/drive/folders/1nUstglcZOSW83EuaeRUKaZxOyHtMBrP5?usp=sharing)
 
 ## Reproducibility
 For reproducible results:
@@ -205,7 +298,3 @@ If you use this code or find our work useful, please cite:
 ## License
 The codes and checkpoints in this repository are under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) license.
 
-## Contact
-For questions or feedback, please contact [reyadhasan605@gmail.com](mailto:reyadhasan605@gmail.com).
-
-Contributions are welcome to enhance this implementation.
