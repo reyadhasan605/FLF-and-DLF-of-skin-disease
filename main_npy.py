@@ -1,5 +1,3 @@
-# fusion_pipeline.py
-
 import os
 import warnings
 import logging

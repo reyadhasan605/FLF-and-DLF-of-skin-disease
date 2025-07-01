@@ -181,7 +181,13 @@ Organize datasets as specified in [Datasets](#datasets). Augment data using GAN 
 
 Organize the dataset as specified in [Datasets](#datasets). Convert the data into numpy format using follwing script:
 
+```
+python utils/numpy_generator.py \
+  --data_dir "/path/to/your/test_directory" \
+  --output_dir "/path/to/save/npy_files" \
+  --image_size 224
 
+```
 
 
 
@@ -239,6 +245,15 @@ Organize the dataset as specified in [Datasets](#datasets). Convert the data int
 #### Evaluating ISIC2018 and PH2 dataset :
 
 Organize the dataset as specified in [Datasets](#datasets). Convert the data into numpy format using follwing script:
+
+```
+python utils/numpy_generator.py \
+  --data_dir "/path/to/your/test_directory" \
+  --output_dir "/path/to/save/npy_files" \
+  --image_size 224
+
+```
+
 
 1. **Feature-Level Fusion**:
    ```
